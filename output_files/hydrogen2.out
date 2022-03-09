@@ -1,0 +1,697 @@
+1 : hydrogen2
+----- GAMESS execution script 'rungms' -----
+This job is running on host mads-yoga
+under operating system Linux at Mon 28 Feb 2022 12:06:54 PM CET
+Available scratch disk space (Kbyte units) at beginning of the job is
+Filesystem     1K-blocks     Used Available Use% Mounted on
+/dev/sda2      122030736 68912656  46876240  60% /
+GAMESS temporary binary files will be written to /home/mads/gamess/restart
+GAMESS supplementary output files will be written to /home/mads/gamess/restart
+Copying input file ./hydrogen2.inp to your run's scratch directory...
+cp ./hydrogen2.inp /home/mads/gamess/restart/hydrogen2.F05
+unset echo
+setenv NO_STOP_MESSAGE 1
+setenv AUXDATA /home/mads/gamess/auxdata
+setenv EXTBAS /dev/null
+setenv NUCBAS /dev/null
+setenv EXTCAB /home/mads/gamess/auxdata/AUXBAS/auxdef21
+setenv POSBAS /dev/null
+setenv DFTBPAR /home/mads/gamess/auxdata/DFTB
+setenv ERICFMT /home/mads/gamess/auxdata/ericfmt.dat
+setenv MCPPATH /home/mads/gamess/auxdata/MCP
+setenv BASPATH /home/mads/gamess/auxdata/BASES
+setenv QUANPOL /home/mads/gamess/auxdata/QUANPOL
+setenv MAKEFP /home/mads/gamess/restart/hydrogen2.efp
+setenv GAMMA /home/mads/gamess/restart/hydrogen2.gamma
+setenv TRAJECT /home/mads/gamess/restart/hydrogen2.trj
+setenv RESTART /home/mads/gamess/restart/hydrogen2.rst
+setenv QMWAVE /home/mads/gamess/restart/hydrogen2.qmw
+setenv MDDIP /home/mads/gamess/restart/hydrogen2.dip
+setenv OPTHES1 /home/mads/gamess/restart/hydrogen2.hs1
+setenv OPTHES2 /home/mads/gamess/restart/hydrogen2.hs2
+setenv FCIDUMP /home/mads/gamess/restart/hydrogen2.FCIDUMP
+setenv XYZ /home/mads/gamess/restart/hydrogen2.xyz
+setenv INPUT /home/mads/gamess/restart/hydrogen2.F05
+setenv PUNCH /home/mads/gamess/restart/hydrogen2.dat
+setenv AOINTS /home/mads/gamess/restart/hydrogen2.F08
+setenv MOINTS /home/mads/gamess/restart/hydrogen2.F09
+setenv DICTNRY /home/mads/gamess/restart/hydrogen2.F10
+setenv DRTFILE /home/mads/gamess/restart/hydrogen2.F11
+setenv CIVECTR /home/mads/gamess/restart/hydrogen2.F12
+setenv CASINTS /home/mads/gamess/restart/hydrogen2.F13
+setenv CIINTS /home/mads/gamess/restart/hydrogen2.F14
+setenv WORK15 /home/mads/gamess/restart/hydrogen2.F15
+setenv WORK16 /home/mads/gamess/restart/hydrogen2.F16
+setenv CSFSAVE /home/mads/gamess/restart/hydrogen2.F17
+setenv FOCKDER /home/mads/gamess/restart/hydrogen2.F18
+setenv WORK19 /home/mads/gamess/restart/hydrogen2.F19
+setenv DASORT /home/mads/gamess/restart/hydrogen2.F20
+setenv DIABDAT /home/mads/gamess/restart/hydrogen2.F21
+setenv DFTINTS /home/mads/gamess/restart/hydrogen2.F21
+setenv DFTGRID /home/mads/gamess/restart/hydrogen2.F22
+setenv JKFILE /home/mads/gamess/restart/hydrogen2.F23
+setenv ORDINT /home/mads/gamess/restart/hydrogen2.F24
+setenv EFPIND /home/mads/gamess/restart/hydrogen2.F25
+setenv PCMDATA /home/mads/gamess/restart/hydrogen2.F26
+setenv PCMINTS /home/mads/gamess/restart/hydrogen2.F27
+setenv SVPWRK1 /home/mads/gamess/restart/hydrogen2.F26
+setenv SVPWRK2 /home/mads/gamess/restart/hydrogen2.F27
+setenv COSCAV /home/mads/gamess/restart/hydrogen2.F26
+setenv COSDATA /home/mads/gamess/restart/hydrogen2.cosmo
+setenv COSPOT /home/mads/gamess/restart/hydrogen2.pot
+setenv MLTPL /home/mads/gamess/restart/hydrogen2.F28
+setenv MLTPLT /home/mads/gamess/restart/hydrogen2.F29
+setenv DAFL30 /home/mads/gamess/restart/hydrogen2.F30
+setenv SOINTX /home/mads/gamess/restart/hydrogen2.F31
+setenv SOINTY /home/mads/gamess/restart/hydrogen2.F32
+setenv SOINTZ /home/mads/gamess/restart/hydrogen2.F33
+setenv SORESC /home/mads/gamess/restart/hydrogen2.F34
+setenv GCILIST /home/mads/gamess/restart/hydrogen2.F37
+setenv HESSIAN /home/mads/gamess/restart/hydrogen2.F38
+setenv QMMMTEI /home/mads/gamess/restart/hydrogen2.F39
+setenv SOCCDAT /home/mads/gamess/restart/hydrogen2.F40
+setenv AABB41 /home/mads/gamess/restart/hydrogen2.F41
+setenv BBAA42 /home/mads/gamess/restart/hydrogen2.F42
+setenv BBBB43 /home/mads/gamess/restart/hydrogen2.F43
+setenv REMD /home/mads/gamess/restart/hydrogen2.F44
+setenv UNV /home/mads/gamess/restart/hydrogen2.F45
+setenv UNPV /home/mads/gamess/restart/hydrogen2.F46
+setenv MCQD50 /home/mads/gamess/restart/hydrogen2.F50
+setenv MCQD51 /home/mads/gamess/restart/hydrogen2.F51
+setenv MCQD52 /home/mads/gamess/restart/hydrogen2.F52
+setenv MCQD53 /home/mads/gamess/restart/hydrogen2.F53
+setenv MCQD54 /home/mads/gamess/restart/hydrogen2.F54
+setenv MCQD55 /home/mads/gamess/restart/hydrogen2.F55
+setenv MCQD56 /home/mads/gamess/restart/hydrogen2.F56
+setenv MCQD57 /home/mads/gamess/restart/hydrogen2.F57
+setenv MCQD58 /home/mads/gamess/restart/hydrogen2.F58
+setenv MCQD59 /home/mads/gamess/restart/hydrogen2.F59
+setenv MCQD60 /home/mads/gamess/restart/hydrogen2.F60
+setenv MCQD61 /home/mads/gamess/restart/hydrogen2.F61
+setenv MCQD62 /home/mads/gamess/restart/hydrogen2.F62
+setenv MCQD63 /home/mads/gamess/restart/hydrogen2.F63
+setenv MCQD64 /home/mads/gamess/restart/hydrogen2.F64
+setenv NMRINT1 /home/mads/gamess/restart/hydrogen2.F61
+setenv NMRINT2 /home/mads/gamess/restart/hydrogen2.F62
+setenv NMRINT3 /home/mads/gamess/restart/hydrogen2.F63
+setenv NMRINT4 /home/mads/gamess/restart/hydrogen2.F64
+setenv NMRINT5 /home/mads/gamess/restart/hydrogen2.F65
+setenv NMRINT6 /home/mads/gamess/restart/hydrogen2.F66
+setenv DCPHFH2 /home/mads/gamess/restart/hydrogen2.F67
+setenv DCPHF21 /home/mads/gamess/restart/hydrogen2.F68
+setenv ELNUINT /home/mads/gamess/restart/hydrogen2.F67
+setenv NUNUINT /home/mads/gamess/restart/hydrogen2.F68
+setenv GVVPT /home/mads/gamess/restart/hydrogen2.F69
+setenv NUMOIN /home/mads/gamess/restart/hydrogen2.F69
+setenv NUMOCAS /home/mads/gamess/restart/hydrogen2.F70
+setenv NUELMO /home/mads/gamess/restart/hydrogen2.F71
+setenv NUELCAS /home/mads/gamess/restart/hydrogen2.F72
+setenv RIVMAT /home/mads/gamess/restart/hydrogen2.F51
+setenv RIT2A /home/mads/gamess/restart/hydrogen2.F52
+setenv RIT3A /home/mads/gamess/restart/hydrogen2.F53
+setenv RIT2B /home/mads/gamess/restart/hydrogen2.F54
+setenv RIT3B /home/mads/gamess/restart/hydrogen2.F55
+setenv DEN2P1 /home/mads/gamess/restart/hydrogen2.F70
+setenv DEN2P2 /home/mads/gamess/restart/hydrogen2.F71
+setenv DEN2P3 /home/mads/gamess/restart/hydrogen2.F72
+setenv DEN2P4 /home/mads/gamess/restart/hydrogen2.F73
+setenv DEN2NM /home/mads/gamess/restart/hydrogen2.F74
+setenv DEN2OPT /home/mads/gamess/restart/hydrogen2.F75
+setenv GMCREF /home/mads/gamess/restart/hydrogen2.F70
+setenv GMCO2R /home/mads/gamess/restart/hydrogen2.F71
+setenv GMCROC /home/mads/gamess/restart/hydrogen2.F72
+setenv GMCOOC /home/mads/gamess/restart/hydrogen2.F73
+setenv GMCCC0 /home/mads/gamess/restart/hydrogen2.F74
+setenv GMCHMA /home/mads/gamess/restart/hydrogen2.F75
+setenv GMCEI1 /home/mads/gamess/restart/hydrogen2.F76
+setenv GMCEI2 /home/mads/gamess/restart/hydrogen2.F77
+setenv GMCEOB /home/mads/gamess/restart/hydrogen2.F78
+setenv GMCEDT /home/mads/gamess/restart/hydrogen2.F79
+setenv GMCERF /home/mads/gamess/restart/hydrogen2.F80
+setenv GMCHCR /home/mads/gamess/restart/hydrogen2.F81
+setenv GMCGJK /home/mads/gamess/restart/hydrogen2.F82
+setenv GMCGAI /home/mads/gamess/restart/hydrogen2.F83
+setenv GMCGEO /home/mads/gamess/restart/hydrogen2.F84
+setenv GMCTE1 /home/mads/gamess/restart/hydrogen2.F85
+setenv GMCTE2 /home/mads/gamess/restart/hydrogen2.F86
+setenv GMCHEF /home/mads/gamess/restart/hydrogen2.F87
+setenv GMCMOL /home/mads/gamess/restart/hydrogen2.F88
+setenv GMCMOS /home/mads/gamess/restart/hydrogen2.F89
+setenv GMCWGT /home/mads/gamess/restart/hydrogen2.F90
+setenv GMCRM2 /home/mads/gamess/restart/hydrogen2.F91
+setenv GMCRM1 /home/mads/gamess/restart/hydrogen2.F92
+setenv GMCR00 /home/mads/gamess/restart/hydrogen2.F93
+setenv GMCRP1 /home/mads/gamess/restart/hydrogen2.F94
+setenv GMCRP2 /home/mads/gamess/restart/hydrogen2.F95
+setenv GMCVEF /home/mads/gamess/restart/hydrogen2.F96
+setenv GMCDIN /home/mads/gamess/restart/hydrogen2.F97
+setenv GMC2SZ /home/mads/gamess/restart/hydrogen2.F98
+setenv GMCCCS /home/mads/gamess/restart/hydrogen2.F99
+unset echo
+/home/mads/gamess/ddikick.x /home/mads/gamess/gamess.00.x hydrogen2 -ddi 1 1 mads-yoga -scr /home/mads/gamess/restart
+
+ Distributed Data Interface kickoff program.
+ Initiating 1 compute processes on 1 nodes to run the following command:
+ /home/mads/gamess/gamess.00.x hydrogen2 
+
+          *******************************************************
+          *                                                     *
+          *      GAMESS VERSION = 30 SEP 2021 (R2 Patch 1)      *
+          *                                                     *
+          *              doi.org/10.1063/5.0005188              *
+          *                                                     *
+          **************** 64 BIT LINUX VERSION *****************
+
+  GAMESS HAS BEEN MADE POSSIBLE WITH IMPORTANT CONTRIBUTIONS FROM
+  THE FOLLOWING INDIVIDUALS (IN ALPHABETICAL ORDER):
+
+     IVANA ADAMOVIC, CHRISTINE AIKENS, TOMOKO AKAMA,
+     YURI ALEXEEV, YURIKO AOKI, POOJA ARORA, TOSHIO ASADA,
+     ANDREY ASADCHEV, KIM K. BALDRIDGE, PRADIPTA BANDYOPADHYAY,
+     TAYLOR A. BARNES, MARIA BARYSZ, ROB BELL,
+     JONATHAN BENTZ, COLLEEN BERTONI,
+     JERRY A. BOATZ, BRETT BODE, KURT BRORSEN, KURT R. BRORSEN,
+     LAIMUTIS BYTAUTAS, CALEB CARLIN, LAURA CARRINGTON,
+     GALINA CHABAN, BENOIT CHAMPAGNE, WEI CHEN, MAHITO CHIBA,
+     DAN CHIPMAN, CHEOL HO CHOI, TANNER CULPITT,
+     DIPAYAN DATTA, PAUL DAY, ALBERT DEFUSCO,
+     NUWAN DESILVA, J. EMILIANO DEUSTUA,
+     TIM DUDLEY, MICHEL DUPUIS, STEVEN T. ELBERT,
+     DMITRI FEDOROV, ALEX FINDLATER, GRAHAM FLETCHER,
+     MARK FREITAG, CHRISTIAN FRIEDL, DAVID GARMER,
+     IGOR S. GERASIMOV, KURT GLAESEMANN, MARK S. GORDON,
+     JEFFREY GOUR, FENG LONG GU, EMILIE B. GUIDEZ,
+     ANASTASIA GUNINA, SHARON HAMMES-SCHIFFER, MASATAKE HARUTA,
+     KIMIHIKO HIRAO, YASUHIRO IKABATA, TZVETELIN IORDANOV,
+     STEPHAN IRLE, KAZUYA ISHIMURA, JOE IVANIC, FRANK JENSEN,
+     JAN H. JENSEN, VISVALDAS KAIRYS, MUNEAKI KAMIYA,
+     MICHIO KATOUDA, NAOAKI KAWAKAMI, DAN KEMP, BERNARD KIRTMAN,
+     KAZUO KITAURA, MARIUSZ KLOBUKOWSKI, MASATO KOBAYASHI,
+     PRAKASHAN KORAMBATH, JACEK KORCHOWIEC, SHIRO KOSEKI,
+     KAROL KOWALSKI, JIMMY KROMANN, STANISLAW KUCHARSKI,
+     HENRY KURTZ, SAROM SOK LEANG, HUI LI, SHUHUA LI, WEI LI,
+     JESSE LUTZ, ALEKSANDR O. LYKHIN, MARCIN MAKOWSKI,
+     JOANI MATO, NIKITA MATSUNAGA, BENEDETTA MENNUCCI,
+     GRANT MERRILL, NORIYUKI MINEZAWA, VLADIMIR MIRONOV,
+     EISAKU MIYOSHI, JOHN A. MONTGOMERY JR., HIROTOSHI MORI,
+     JONATHAN MULLIN, MONIKA MUSIAL, SHIGERU NAGASE,
+     TAKESHI NAGATA, HIROMI NAKAI, TAKAHITO NAKAJIMA,
+     YUYA NAKAJIMA, HARUYUKI NAKANO, HIROYA NAKATA, SEAN NEDD,
+     HEATHER NETZLOFF, KIET A. NGUYEN, YOSHIO NISHIMOTO,
+     BOSILJKA NJEGIC, RYAN OLSON, MIKE PAK, ROBERTO PEVERATI,
+     BUU PHAM, PIOTR PIECUCH, ANNA POMOGAEVA, DAVID POOLE,
+     SPENCER PRUITT, OLIVIER QUINET, LUKE ROSKOP,
+     KLAUS RUEDENBERG, ANDREW SAND, TOSAPORN SATTASATHUCHANA,
+     NOZOMI SAWADA, MICHAEL W. SCHMIDT, PATRICK E. SCHNEIDER,
+     JUNJI SEINO, PRACHI SHARMA, JUN SHEN, JIM SHOEMAKER,
+     YINAN SHU, DEJUN SI, JONATHAN SKONE, LYUDMILA SLIPCHENKO,
+     TONY SMITH, JIE SONG, MARK SPACKMAN, CASPER STEINMANN,
+     WALT STEVENS, PEIFENG SU, SHUJUN SU, CHET SWALINA,
+     TETSUYA TAKETSUGU, ZHEN TAO, NANDUN THELLAMUREGE
+     SEIKEN TOKURA, JACOPO TOMASI, TSUGUKI TOUMA, TAKAO TSUNEDA,
+     HIROAKI UMEDA, JORGE LUIS GALVEZ VALLEJO, YALI WANG,
+     SIMON WEBB, AARON WEST, THERESA L. WINDUS, MARTA WLOCH,
+     PENG XU, KIYOSHI YAGI, SUSUMU YANAGISAWA, YANG YANG,
+     SOOHAENG YOO, TAKESHI YOSHIKAWA, FEDERICO ZAHARIEV,
+     TOBY ZENG
+
+  WHO ARE SUPPORTED BY THEIR INSTITUTION/UNIVERSITY/COMPANY/GROUP
+  (IN ALPHABETICAL ORDER):
+
+     EP ANALYTICS, FACULTES UNIVERSITAIRES NOTRE-DAME DE LA PAIX,
+     INSTITUTE FOR MOLECULAR SCIENCE, IOWA STATE UNIVERSITY,
+     JACKSON STATE UNIVERSITY, JOHANNES KEPLER UNIVERSITY LINZ,
+     KYUSHU UNIVERSITY, MICHIGAN STATE UNIVERSITY,
+     MIE UNIVERSITY, THE MOLECULAR SCIENCES SOFTWARE INSTITUTE,
+     MOSCOW STATE UNIVERSITY,
+     N. COPERNICUS UNIVERSITY, NAGOYA UNIVERSITY,
+     NANJING UNIVERSITY, NAT. INST. OF ADVANCED INDUSTRIAL
+     SCIENCE AND TECHNOLOGY, NATIONAL INST. OF STANDARDS AND
+     TECHNOLOGY, NESMEYANOV INSTITUTE OF ORGANOELEMENT COMPOUNDS
+     OF RUSSIAN ACADEMY OF SCIENCES, OSAKA PREFECTURE UNIVERSITY,
+     PENNSYLVANIA STATE UNIVERSITY, TOKYO INSTITUTE OF TECHNOLOGY,
+     UNIVERSITY OF AARHUS, UNIVERSITY OF ALBERTA,
+     UNIVERSITY OF CALIFORNIA AT SANTA BARBARA,
+     UNIVERSITY OF COPENHAGEN, UNIVERSITY OF IOWA,
+     UNIVERSITY OF MEMPHIS, UNIVERSITY OF MINNESOTA,
+     UNIVERSITY OF NEBRASKA, UNIVERSITY OF NEW ENGLAND,
+     UNIVERSITY OF NOTRE DAME, UNIVERSITY OF PISA,
+     UNIVERSITY OF SILESIA, UNIVERSITY OF TOKYO,
+     UNIVERSITY OF ZURICH, WASEDA UNIVERSITY, YALE UNIVERSITY
+
+  GAMESS SOFTWARE MANAGEMENT TEAM FOR THIS RELEASE:
+     MARK S. GORDON (TEAM LEAD),
+     BRETT BODE (SENIOR ADVISOR),
+     GIUSEPPE BARCA,
+     COLLEEN BERTONI,
+     KRISTOPHER KEIPERT (ADVISOR),
+     SAROM S. LEANG (DEVELOPMENT LEAD),
+     BUU PHAM,
+     JORGE LUIS GALVEZ VALLEJO (WEBSITE ADMINISTRATOR),
+     PENG XU
+
+ EXECUTION OF GAMESS BEGUN 12:06:54 28-FEB-2022    
+
+            ECHO OF THE FIRST FEW INPUT CARDS -
+ INPUT CARD>!   File created by the GAMESS Input Deck Generator Plugin for Avogadro         
+ INPUT CARD> $BASIS GBASIS=N31 NGAUSS=6 NDFUNC=1 NPFUNC=1 DIFFSP=.TRUE. $END                
+ INPUT CARD> $CONTRL SCFTYP=ROHF RUNTYP=OPTIMIZE MULT=2 $END                                
+ INPUT CARD> $STATPT OPTTOL=0.0001 NSTEP=20 $END                                            
+ INPUT CARD>                                                                                
+ INPUT CARD> $DATA                                                                          
+ INPUT CARD>Title                                                                           
+ INPUT CARD>C1                                                                              
+ INPUT CARD>H     1.0     0.00000     0.00000     0.00000                                   
+ INPUT CARD> $END                                                                           
+    1000000 WORDS OF MEMORY AVAILABLE
+
+     BASIS OPTIONS
+     -------------
+     GBASIS=N31          IGAUSS=       6      POLAR=POPN31  
+     NDFUNC=       1     NFFUNC=       0     DIFFSP=       T
+     NPFUNC=       1      DIFFS=       F     BASNAM=        
+
+
+     RUN TITLE
+     ---------
+ Title                                                                           
+
+ THE POINT GROUP OF THE MOLECULE IS C1      
+ THE ORDER OF THE PRINCIPAL AXIS IS     0
+
+ ATOM      ATOMIC                      COORDINATES (BOHR)
+           CHARGE         X                   Y                   Z
+ H           1.0     0.0000000000        0.0000000000        0.0000000000
+
+          INTERNUCLEAR DISTANCES (ANGS.)
+          ------------------------------
+
+                1 H     
+
+   1 H       0.0000000  
+
+  * ... LESS THAN  3.000
+
+
+     ATOMIC BASIS SET
+     ----------------
+ THE CONTRACTED PRIMITIVE FUNCTIONS HAVE BEEN UNNORMALIZED
+ THE CONTRACTED BASIS FUNCTIONS ARE NOW NORMALIZED TO UNITY
+
+  SHELL TYPE  PRIMITIVE        EXPONENT          CONTRACTION COEFFICIENT(S)
+
+ H         
+
+      1   S       1            18.7311370    0.033494604338
+      1   S       2             2.8253944    0.234726953484
+      1   S       3             0.6401217    0.813757326146
+
+      2   S       4             0.1612778    1.000000000000
+
+      3   P       5             1.1000000    1.000000000000
+
+ TOTAL NUMBER OF BASIS SET SHELLS             =    3
+ NUMBER OF CARTESIAN GAUSSIAN BASIS FUNCTIONS =    5
+ NUMBER OF ELECTRONS                          =    1
+ CHARGE OF MOLECULE                           =    0
+ SPIN MULTIPLICITY                            =    2
+ NUMBER OF OCCUPIED ORBITALS (ALPHA)          =    1
+ NUMBER OF OCCUPIED ORBITALS (BETA )          =    0
+ TOTAL NUMBER OF ATOMS                        =    1
+ THE NUCLEAR REPULSION ENERGY IS        0.0000000000
+
+ THIS MOLECULE IS RECOGNIZED AS BEING LINEAR,
+ ORBITAL LZ DEGENERACY TOLERANCE ETOLLZ= 1.00E-06
+
+     $CONTRL OPTIONS
+     ---------------
+ SCFTYP=ROHF         RUNTYP=OPTIMIZE     EXETYP=RUN     
+ MPLEVL=       0     CITYP =NONE         CCTYP =NONE         VBTYP =NONE    
+ DFTTYP=NONE         TDDFT =NONE    
+ MULT  =       2     ICHARG=       0     NZVAR =       0     COORD =UNIQUE  
+ PP    =NONE         RELWFN=NONE         LOCAL =NONE         NUMGRD=       F
+ ISPHER=      -1     NOSYM =       0     MAXIT =      30     UNITS =ANGS    
+ PLTORB=       F     MOLPLT=       F     AIMPAC=       F     FRIEND=        
+ NPRINT=       7     IREST =       0     GEOM  =INPUT   
+ NORMF =       0     NORMP =       0     ITOL  =      20     ICUT  =       9
+ INTTYP=BEST         GRDTYP=BEST         QMTTOL= 1.0E-06
+
+     $SYSTEM OPTIONS
+     ---------------
+  REPLICATED MEMORY=     1000000 WORDS (ON EVERY NODE).
+ DISTRIBUTED MEMDDI=           0 MILLION WORDS IN AGGREGATE,
+ MEMDDI DISTRIBUTED OVER   1 PROCESSORS IS           0 WORDS/PROCESSOR.
+ TOTAL MEMORY REQUESTED ON EACH PROCESSOR=     1000000 WORDS.
+ TIMLIM=      525600.00 MINUTES, OR     365.0 DAYS.
+ PARALL= F  BALTYP=  DLB     KDIAG=    0  COREFL= F
+ MXSEQ2=     300 MXSEQ3=     150  mem10=         0  mem22=         0
+
+          ----------------
+          PROPERTIES INPUT
+          ----------------
+
+     MOMENTS            FIELD           POTENTIAL          DENSITY
+ IEMOM =       1   IEFLD =       0   IEPOT =       0   IEDEN =       0
+ WHERE =COMASS     WHERE =NUCLEI     WHERE =NUCLEI     WHERE =NUCLEI  
+ OUTPUT=BOTH       OUTPUT=BOTH       OUTPUT=BOTH       OUTPUT=BOTH    
+ IEMINT=       0   IEFINT=       0                     IEDINT=       0
+                                                       MORB  =       0
+          EXTRAPOLATION IN EFFECT
+ ORBITAL PRINTING OPTION: NPREO=     1     5     2     1
+
+     -------------------------------
+     INTEGRAL TRANSFORMATION OPTIONS
+     -------------------------------
+     NWORD  =            0
+     CUTOFF = 1.0E-09     MPTRAN =       0
+     DIRTRF =       F     AOINTS =DUP     
+
+          ----------------------
+          INTEGRAL INPUT OPTIONS
+          ----------------------
+ NOPK  =       1 NORDER=       0 SCHWRZ=       F
+
+     ------------------------------------------
+     THE POINT GROUP IS C1 , NAXIS= 0, ORDER= 1
+     ------------------------------------------
+
+     DIMENSIONS OF THE SYMMETRY SUBSPACES ARE
+ A   =    5
+
+ ..... DONE SETTING UP THE RUN .....
+ STEP CPU TIME =     0.03 TOTAL CPU TIME =          0.0 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    47.00%
+
+
+          -----------------------------
+          STATIONARY POINT LOCATION RUN
+          -----------------------------
+
+ OBTAINING INITIAL HESSIAN, HESS=GUESS   
+ CARTESIAN COORDINATE OPTIMIZATION USING BADGER'S RULE FORCE CONSTANT GUESS
+
+          PARAMETERS CONTROLLING GEOMETRY SEARCH ARE
+          METHOD =QA                  UPHESS =BFGS    
+          NNEG   =         0          NFRZ   =         0
+          NSTEP  =        20          IFOLOW =         1
+          HESS   =GUESS               RESTAR =         F
+          IHREP  =         0          HSSEND =         F
+          NPRT   =         0          NPUN   =         0
+          OPTTOL = 1.000E-04          RMIN   = 1.500E-03
+          RMAX   = 1.000E-01          RLIM   = 7.000E-02
+          DXMAX  = 3.000E-01          PURIFY =         F
+          MOVIE  =         F          TRUPD  =         T
+          TRMAX  = 5.000E-01          TRMIN  = 5.000E-02
+          ITBMAT =         5          STPT   =         F
+          STSTEP = 1.000E-02          PROJCT=          T
+
+ BEGINNING GEOMETRY SEARCH POINT NSERCH=   0 ...
+
+ COORDINATES OF ALL ATOMS ARE (ANGS)
+   ATOM   CHARGE       X              Y              Z
+ ------------------------------------------------------------
+ H           1.0   0.0000000000   0.0000000000   0.0000000000
+
+          ********************
+          1 ELECTRON INTEGRALS
+          ********************
+ ...... END OF ONE-ELECTRON INTEGRALS ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.0 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    46.50%
+
+          -------------
+          GUESS OPTIONS
+          -------------
+          GUESS =HUCKEL            NORB  =       0          NORDER=       0
+          MIX   =       F          PRTMO =       F          PUNMO =       F
+          TOLZ  = 1.0E-08          TOLE  = 1.0E-05
+          SYMDEN=       F          PURIFY=       F
+
+ INITIAL GUESS ORBITALS GENERATED BY HUCKEL   ROUTINE.
+ HUCKEL GUESS REQUIRES       898 WORDS.
+
+ SYMMETRIES FOR INITIAL GUESS ORBITALS FOLLOW.  ALPHA SET(S).
+     1 ORBITALS ARE OCCUPIED (    0 CORE ORBITALS).
+     1=A        2=A        3=A        4=A        5=A   
+ ...... END OF INITIAL ORBITAL SELECTION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.0 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    45.66%
+
+                    ----------------------
+                    AO INTEGRAL TECHNOLOGY
+                    ----------------------
+     S,P,L SHELL ROTATED AXIS INTEGRALS, REPROGRAMMED BY
+        KAZUYA ISHIMURA (IMS) AND JOSE SIERRA (SYNSTAR).
+     S,P,D,L SHELL ROTATED AXIS INTEGRALS PROGRAMMED BY
+        KAZUYA ISHIMURA (INSTITUTE FOR MOLECULAR SCIENCE).
+     S,P,D,F,G SHELL TO TOTAL QUARTET ANGULAR MOMENTUM SUM 5,
+        ERIC PROGRAM BY GRAHAM FLETCHER (ELORET AND NASA ADVANCED
+        SUPERCOMPUTING DIVISION, AMES RESEARCH CENTER).
+     S,P,D,F,G,L SHELL GENERAL RYS QUADRATURE PROGRAMMED BY
+        MICHEL DUPUIS (PACIFIC NORTHWEST NATIONAL LABORATORY).
+
+          --------------------
+          2 ELECTRON INTEGRALS
+          --------------------
+
+ THE -PK- OPTION IS OFF, THE INTEGRALS ARE NOT IN SUPERMATRIX FORM.
+ STORING   15000 INTEGRALS/RECORD ON DISK, USING 12 BYTES/INTEGRAL.
+ TWO ELECTRON INTEGRAL EVALUATION REQUIRES   89362 WORDS OF MEMORY.
+ II,JST,KST,LST =  1  1  1  1 NREC =         1 INTLOC =    1
+ II,JST,KST,LST =  2  1  1  1 NREC =         1 INTLOC =    2
+ II,JST,KST,LST =  3  1  1  1 NREC =         1 INTLOC =    7
+ TOTAL NUMBER OF NONZERO TWO-ELECTRON INTEGRALS =                  33
+          1 INTEGRAL RECORDS WERE STORED ON DISK FILE  8.
+  ...... END OF TWO-ELECTRON INTEGRALS .....
+ STEP CPU TIME =     0.02 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    55.65%
+
+          ---------------------------
+                 ROHF SCF CALCULATION
+          ---------------------------
+
+     NUCLEAR ENERGY =         0.0000000000
+     MAXIT = 30     NPUNCH=  2     MULT=  2
+     EXTRAP=T  DAMP=F  SHIFT=F  RSTRCT=F  DIIS=F  SOSCF=F
+     DENSITY MATRIX CONV=  1.00E-05
+     ROHF CANONICALIZATION PARAMETERS
+             C-C     O-O     V-V
+     ALPHA -0.5000  0.5000  1.5000
+     BETA   1.5000  0.5000 -0.5000
+     MEMORY REQUIRED FOR UHF/ROHF ITERS=     30300 WORDS.
+
+ ITER EX      TOTAL ENERGY        E CHANGE  DENSITY CHANGE    DIIS ERROR
+   1  0       -0.4641827651    -0.4641827651   0.178441695   0.000000000
+   2  1       -0.4947088078    -0.0305260427   0.059839618   0.000000000
+   3  2       -0.4978678482    -0.0031590403   0.019938753   0.000000000
+   4  3       -0.4981950896    -0.0003272415   0.006484650   0.000000000
+   5  0       -0.4982289911    -0.0000339015   0.003088344   0.000000000
+   6  1       -0.4982329092    -0.0000039181   0.000000514   0.000000000
+   7  2       -0.4982329092    -0.0000000000   0.000000165   0.000000000
+
+          -----------------
+          DENSITY CONVERGED
+          -----------------
+     TIME TO FORM FOCK OPERATORS=       0.0 SECONDS (       0.0 SEC/ITER)
+     TIME TO SOLVE SCF EQUATIONS=       0.0 SECONDS (       0.0 SEC/ITER)
+
+ FINAL ROHF ENERGY IS       -0.4982329092 AFTER   7 ITERATIONS
+
+          --------------------
+          SPIN SZ   =    0.500
+          S-SQUARED =    0.750
+          --------------------
+
+ LZ VALUE ANALYSIS FOR THE MOS
+ ----------------------------------------
+ MO     1 (    1) HAS LZ(WEIGHT)= 0.00(100.0%) 
+ MO     2 (    2) HAS LZ(WEIGHT)= 0.00(100.0%) 
+ MO     3 (    3) HAS LZ(WEIGHT)=-1.00( 50.0%)  1.00( 50.0%) 
+ MO     4 (    3) HAS LZ(WEIGHT)=-1.00( 50.0%)  1.00( 50.0%) 
+ MO     5 (    3) HAS LZ(WEIGHT)= 0.00(100.0%) 
+
+          ------------
+          MOLECULAR ORBITALS
+          ------------
+
+                      1          2          3          4          5
+                   -0.4982     0.9162     2.2309     2.2309     2.2309
+                     A          A          A          A          A   
+    1  H  1  S    0.427430   1.257798   0.000000   0.000000   0.000000
+    2  H  1  S    0.665449  -1.149752   0.000000   0.000000   0.000000
+    3  H  1  X    0.000000  -0.000000   1.000000   0.000000   0.000000
+    4  H  1  Y    0.000000  -0.000000   0.000000   1.000000   0.000000
+    5  H  1  Z    0.000000  -0.000000   0.000000   0.000000   1.000000
+
+ ...... END OF ROHF CALCULATION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    55.96%
+
+     ----------------------------------------------------------------
+     PROPERTY VALUES FOR THE ROHF  SELF-CONSISTENT FIELD WAVEFUNCTION
+     ----------------------------------------------------------------
+
+          -----------------
+          ENERGY COMPONENTS
+          -----------------
+
+         WAVEFUNCTION NORMALIZATION =       1.0000000000
+
+                ONE ELECTRON ENERGY =      -0.4982329092
+                TWO ELECTRON ENERGY =       0.0000000000
+           NUCLEAR REPULSION ENERGY =       0.0000000000
+                                      ------------------
+                       TOTAL ENERGY =      -0.4982329092
+
+ ELECTRON-ELECTRON POTENTIAL ENERGY =       0.0000000000
+  NUCLEUS-ELECTRON POTENTIAL ENERGY =      -1.0080996434
+   NUCLEUS-NUCLEUS POTENTIAL ENERGY =       0.0000000000
+                                      ------------------
+             TOTAL POTENTIAL ENERGY =      -1.0080996434
+               TOTAL KINETIC ENERGY =       0.5098667342
+                 VIRIAL RATIO (V/T) =       1.9771826160
+
+          ---------------------------------------
+          MULLIKEN AND LOWDIN POPULATION ANALYSES
+          ---------------------------------------
+
+     ATOMIC MULLIKEN POPULATION IN EACH MOLECULAR ORBITAL
+
+                      1
+
+                  1.000000
+
+    1             1.000000
+
+     ATOMIC SPIN POPULATION (ALPHA MINUS BETA)
+       ATOM         MULL.POP.                    LOW.POP.
+    1 H             1.000000                     1.000000
+
+               ----- POPULATIONS IN EACH AO -----
+                             MULLIKEN      LOWDIN
+              1  H  1  S      0.36994     0.40209
+              2  H  1  S      0.63006     0.59791
+              3  H  1  X      0.00000     0.00000
+              4  H  1  Y      0.00000     0.00000
+              5  H  1  Z      0.00000     0.00000
+
+          ----- MULLIKEN ATOMIC OVERLAP POPULATIONS -----
+          (OFF-DIAGONAL ELEMENTS NEED TO BE MULTIPLIED BY 2)
+
+             1
+
+    1    1.0000000
+
+          TOTAL MULLIKEN AND LOWDIN ATOMIC POPULATIONS
+       ATOM         MULL.POP.    CHARGE          LOW.POP.     CHARGE
+    1 H             1.000000    0.000000         1.000000    0.000000
+
+          -------------------------------
+          BOND ORDER AND VALENCE ANALYSIS     BOND ORDER THRESHOLD=0.050
+          -------------------------------
+
+                   BOND                       BOND                       BOND
+  ATOM PAIR DIST  ORDER      ATOM PAIR DIST  ORDER      ATOM PAIR DIST  ORDER
+
+                       TOTAL       BONDED        FREE
+      ATOM            VALENCE     VALENCE     VALENCE
+    1 H                 1.000       0.000       1.000
+
+          -----------------------------------------
+          ATOMIC SPIN DENSITY AT THE NUCLEUS (A.U.)
+          -----------------------------------------
+                            SPIN DENS    ALPHA DENS     BETA DENS
+    1  H            1.0     0.2979020       0.29790       0.00000
+
+          ---------------------
+          ELECTROSTATIC MOMENTS
+          ---------------------
+
+ POINT   1           X           Y           Z (BOHR)    CHARGE
+                 0.000000    0.000000    0.000000        0.00 (A.U.)
+         DX          DY          DZ         /D/  (DEBYE)
+     0.000000    0.000000    0.000000    0.000000
+ ...... END OF PROPERTY EVALUATION ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    56.68%
+
+ BEGINNING ONE ELECTRON GRADIENT...
+ ..... END OF 1-ELECTRON GRADIENT ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    56.83%
+
+          ----------------------
+          GRADIENT OF THE ENERGY
+          ----------------------
+ THE COARSE/FINE SCHWARZ SCREENINGS SKIPPED            0/           0 BLOCKS.
+ THE NUMBER OF GRADIENT INTEGRAL BLOCKS COMPUTED WAS         0
+ ...... END OF 2-ELECTRON GRADIENT ......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    56.87%
+
+          NSERCH=  0     ENERGY=      -0.4982329
+
+                                 -----------------------
+                                 GRADIENT (HARTREE/BOHR)
+                                 -----------------------
+        ATOM     ZNUC       DE/DX         DE/DY         DE/DZ
+ --------------------------------------------------------------
+    1  H            1.0     0.0000000     0.0000000     0.0000000
+
+          MAXIMUM GRADIENT = 0.0000000    RMS GRADIENT = 0.0000000
+
+ NSERCH:   0  E=       -0.4982329092  GRAD. MAX=  0.0000000  R.M.S.=  0.0000000
+
+
+      ***** EQUILIBRIUM GEOMETRY LOCATED *****
+ COORDINATES OF ALL ATOMS ARE (ANGS)
+   ATOM   CHARGE       X              Y              Z
+ ------------------------------------------------------------
+ H           1.0   0.0000000000   0.0000000000   0.0000000000
+
+          INTERNUCLEAR DISTANCES (ANGS.)
+          ------------------------------
+
+                1 H     
+
+   1 H       0.0000000  
+
+  * ... LESS THAN  3.000
+
+
+          NUCLEAR ENERGY    =        0.0000000000
+          ELECTRONIC ENERGY =       -0.4982329092
+          TOTAL ENERGY      =       -0.4982329092
+
+ THE INITIAL GEOMETRY IS ALREADY CONVERGED,
+ SO ORBITALS/PROPERTY OUTPUT IS ALREADY PRINTED ABOVE
+  $VIB   
+          IVIB=   0 IATOM=   0 ICOORD=   0 E=       -0.4982329092
+  0.000000000E+00 0.000000000E+00 0.000000000E+00
+  0.000000000E+00 0.000000000E+00 0.000000000E+00
+ ......END OF GEOMETRY SEARCH......
+ STEP CPU TIME =     0.00 TOTAL CPU TIME =          0.1 (      0.0 MIN)
+ TOTAL WALL CLOCK TIME=          0.1 SECONDS, CPU UTILIZATION IS    56.70%
+               580000  WORDS OF DYNAMIC MEMORY USED
+ EXECUTION OF GAMESS TERMINATED NORMALLY 12:06:54 28-FEB-2022    
+ DDI: 263640 bytes (0.3 MB / 0 MWords) used by master data server.
+
+ ----------------------------------------
+ CPU timing information for all processes
+ ========================================
+ 0: 0.40 + 0.22 = 0.63
+ ----------------------------------------
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG IEEE_DENORMAL
+ ddikick.x: exited gracefully.
+unset echo
+----- accounting info -----
+Files used on the master node mads-yoga were:
+-rw-rw-r-- 1 mads mads    2442 Feb 28 12:06 /home/mads/gamess/restart/hydrogen2.dat
+-rw-rw-r-- 1 mads mads     303 Feb 28 12:06 /home/mads/gamess/restart/hydrogen2.F05
+-rw-rw-r-- 1 mads mads  180016 Feb 28 12:06 /home/mads/gamess/restart/hydrogen2.F08
+-rw-rw-r-- 1 mads mads 1963200 Feb 28 12:06 /home/mads/gamess/restart/hydrogen2.F10
+ls: No match.
+ls: No match.
+ls: No match.
+Mon 28 Feb 2022 12:06:57 PM CET
+0.1u 0.0s 0:03.30 4.8% 0+0k 832+24io 11pf+0w
