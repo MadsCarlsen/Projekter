@@ -43,7 +43,7 @@ def GTO_prefactor_LG(px, py, pz, x0, y0, z0, i, j, k, alpha, N, A, E):
     :param A: Vector field
     :param E: Electric field
     """
-    p_t = pz + A  # p_tilde
+    p_t = pz + A  # z component of p_tilde
     val = 1 / (2 * np.sqrt(alpha))  # Just a value used a lot..
 
     # Evaluate the hermite polynomials
