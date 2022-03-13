@@ -5,7 +5,7 @@ import numpy as np
 class BasisFunction:
     """ Class that functions as a contracted GTO basis function """
     def __init__(self, i, j, k, exponent_list, contract_list, atom_position):
-        # Exponents and contraction coeffecients for the contracted GTO's:
+        # Exponents and contraction coefficients for the contracted GTO's:
         self.exp_list = exponent_list
         self.contract_list = contract_list
 
@@ -28,12 +28,17 @@ class BasisFunction:
         y = y - self.atom_position[1]
         z = z - self.atom_position[2]
 
-        res = 0
+        if type(x) == np.ndarray:
+            res = np.zeros_like(x)
+        else:
+            res = 0
+
         # Sum up the individual primitive Gaussians!
         for alpha, front_alpha, contract in zip(self.exp_list, self.front_alphas, self.contract_list):
             res += front_alpha * contract * np.exp(-alpha * (x**2 + y**2 + z**2))
-        res *= self.front_factor * x**self.i * y**self.j * z**self.k
-        return res
+
+        factor = self.front_factor * x**self.i * y**self.j * z**self.k
+        return res * factor
 
 
 class OutputInterface:
@@ -314,13 +319,13 @@ class OutputInterface:
         np.savetxt(f'{name}_GTOs.txt', output)
 
     def eval_orbital(self, x, y, z, orbital_nr=None):
-        """ Evaluates a given orbital in the point (x,y,z) """
+        """ Evaluates a given orbital in the point (x,y,z). Should be able to accept ndarrays as input."""
         # Load the coeffs. and multiply them on the contracted basis sets
         if orbital_nr is None: 
             orbital_nr = self.HOMO
         
         MO_coeffs = self.saved_orbitals[orbital_nr][3]
-        return np.sum([MO_c * basis_func.eval(x, y, z) for MO_c, basis_func in zip(MO_coeffs, self.basis_funcs)])
+        return np.sum([MO_c * basis_func.eval(x, y, z) for MO_c, basis_func in zip(MO_coeffs, self.basis_funcs)], axis=0)
 
     def eval_orbital_spherical(self, r, theta, phi, orbital_nr=None):
         """ Evaluates a given orbital given spherical coordinates (r, theta, phi) """
@@ -332,4 +337,3 @@ class OutputInterface:
         z = r * np.cos(theta)
         return self.eval_orbital(x, y, z, orbital_nr)
 
-# %%
