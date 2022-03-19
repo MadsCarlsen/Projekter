@@ -5,6 +5,7 @@ import pyshtools as pysh
 from scipy.special import sph_harm
 from OutputInterface import OutputInterface
 from scipy.signal import find_peaks
+import scipy.special as sp
 # %%
 
 
@@ -94,56 +95,96 @@ def get_flm(GTO_sph_coeff, r, Ip, Z=1):
     return flm_list
 
 
-def get_asymptotic_coeffs(func, n_pts, n_samp, Ip, Z=1, interval=None, plot=False):
+def get_as_coeffs(func, r, n_samp, Ip, Z=1):
+    """
+    Get the normalised asymptotic coefficients for a given value of r in a.u.
+    """
+    flm_lst = spherical_expansion(lambda theta, phi: func(r, theta, phi), n_samp, plot_coeff=False)
+    ABS_THRESH = 1e-3
+    clm_lst = np.zeros_like(flm_lst, dtype=complex)
+    l_max = flm_lst.shape[1]
+    kappa = np.sqrt(2 * abs(Ip))
+    radial = r ** (Z / kappa - 1) * np.exp(-kappa * r)
+    for l in range(l_max):
+        for m in range(-l, l + 1):
+            sgn = 0 if m >= 0 else 1
+            clm = flm_lst[sgn, l, abs(m)] / radial
+            clm_lst[sgn, l, abs(m)] = clm if abs(clm) > ABS_THRESH else 0
+    return clm_lst / np.sum(np.abs(clm_lst)**2)
+
+
+def get_asymptotic_coeffs(func, n_r, n_samp, Ip, Z=1, interval=None, plot=False):
     """
     Gets the coefficients for the asymptotic wave function from the function
     """
     if interval is None:
-        interval = [2, 20]
+        interval = [2, 17.5]
 
     # First find flms as a function of r
-    r_lst = np.linspace(interval[0], interval[-1], n_pts)
+    r_lst = np.linspace(interval[0], interval[-1], n_r)
     flm_lst = []
     for i, r in enumerate(r_lst):
-        print(f'Evaluating at r={r:.4f} \t Nr. {i + 1}/{n_pts}')
+        print(f'Evaluating at r={r:.4f} \t Nr. {i + 1}/{n_r}')
         flm_lst.append(spherical_expansion(lambda theta, phi: func(r, theta, phi), n_samp, plot_coeff=False))
+    flm_lst = np.array(flm_lst)
 
     # Loop through all of the coeffiicients and find the constant clm.
     # If it is lower than a threshold, it is set to zero
-    flm_lst = np.array(flm_lst)
-    ABS_THRESH = 1e-10
+    ABS_THRESH = 1e-2
     clm_lst = np.zeros_like(flm_lst[0])
-    l_max = flm_lst.shape[1]
-    kappa = np.sqrt(2*Ip)
-    radial = lambda r: r**(Z/kappa - 1) * np.exp(-kappa*r)
+    l_max = flm_lst.shape[2]
+    kappa = np.sqrt(2*np.abs(Ip))
+    radial = lambda r, k: r**(Z/k - 1) * np.exp(-k*r)
 
     for l in range(l_max):
-        if l == 0:
-            clm = flm_lst[:, 0, 0, 0]/radial(r_lst)
-            idx = find_peaks(np.abs(clm))[0]  # Last radial peak!
-            if plot:
-                plt.figure(facecolor='white')
-                plt.plot(r_lst, np.abs(clm))
-                plt.xlabel(f'{int(idx.size > 0)}')
-                plt.show()
-            if idx.size > 0:
-                val = clm[idx[-1]]
-                clm_lst[0, 0, 0] = (val if val > ABS_THRESH else 0)
-            continue
         for m in range(-l, l + 1):
-            sgn = int(m < 0)  # 0 for m >= 0 and 1 for m < 0
-            clm = flm_lst[:, sgn, l, abs(m)] / radial(r_lst)
-            idx = find_peaks(np.abs(clm))[0]  # Last radial peak!
-            if plot:
-                plt.figure(facecolor='white')
-                plt.plot(r_lst, np.abs(clm))
-                plt.xlabel(f'{int(idx.size > 0)}')
-                plt.show()
+            sgn = 0 if m >= 0 else 1
+            clm = flm_lst[:, sgn, l, abs(m)] / radial(r_lst, kappa)
+            idx = find_peaks(np.abs(clm))[0]
             if idx.size > 0:
+                print(f'l={l} \t m={m} \t {r_lst[idx]} \t {clm[idx]}')
                 val = clm[idx[-1]]
-                clm_lst[sgn, l, abs(m)] = (val if val > ABS_THRESH else 0)
+                clm_lst[sgn, l, abs(m)] = (val if np.abs(val) > ABS_THRESH else 0)
+                if plot:
+                    FUSK_FACTOR = 70
+                    plt.figure(facecolor='white')
+                    plt.plot(r_lst, np.abs(clm), label=r'$c_{\ell m}$')
+                    plt.plot(r_lst, FUSK_FACTOR * np.abs(flm_lst[:, sgn, l, abs(m)]), label=r'$f_{\ell m}$')
+                    plt.xlabel(r'Radius $r$')
+                    plt.ylabel(r'Absolute amplitude')
+                    plt.plot(r_lst[idx], np.abs(clm[idx]), 'o')
+                    plt.legend(frameon=False)
+                    plt.minorticks_on()
+                    plt.show()
 
     return clm_lst / np.sum(np.abs(clm_lst)**2)
+
+
+def eval_asymptotic_cart(x, y, z, coeffs, Ip, Z=1):
+    """
+    Evaluates the asymptotic wave function in cartesian coordinates
+    """
+    l_max = coeffs.shape[1]
+    kappa = np.sqrt(2 * abs(Ip))
+    eta = 2 * Z / kappa + 5
+    radial_norm = np.sqrt((2 * kappa) ** eta / sp.gamma(eta))
+
+    r = np.sqrt(x**2 + y**2 + z**2)
+    theta = np.arctan2(np.sqrt(x**2 + y**2), z)
+    phi = np.arctan2(y, x)
+
+    if type(x) is np.ndarray:
+        radial_part, angular_sum = np.zeros_like(x, dtype=complex), np.zeros_like(x, dtype=complex)
+    else:
+        radial_part, angular_sum = 0, 0
+
+    radial_part += radial_norm * r**(Z / kappa - 1) * np.exp(-kappa * r)
+    for l in range(l_max):
+        for m in range(-l, l + 1):
+            sgn = 1 if m >= 0 else 0
+            angular_sum += coeffs[sgn, l, m]*sp.sph_harm(m, l, phi, theta)
+
+    return radial_part * angular_sum
 
 
 def eval_asymptotic(r, theta, phi, coeff_array, Ip, Z=1):
