@@ -39,7 +39,7 @@ def GTO_prefactor_LG(px, py, pz, x0, y0, z0, i, j, k, alpha, N, A, E):
     :param j: Exponent of GTO y variable
     :param k: Exponent of GTO z variable
     :param alpha: GTO exponent
-    :param N: Front factor of GTO - Normalization * contraction coeffcicient * MO-orbital coeffcient
+    :param N: Front factor of GTO - Normalization * contraction coefficient * MO-orbital coefficient
     :param A: Vector field
     :param E: Electric field
     """
@@ -57,11 +57,10 @@ def GTO_prefactor_LG(px, py, pz, x0, y0, z0, i, j, k, alpha, N, A, E):
          * Hx * np.exp(-px ** 2 / (4 * alpha))
     Iy = np.exp(-1j * py * y0) * np.sqrt(np.pi / alpha) * (-1j * val) ** j \
          * Hy * np.exp(-py ** 2 / (4 * alpha))
-    Iz = np.exp(-1j * p_t * z0) * np.sqrt(np.pi / alpha) * np.exp(-p_t ** 2 / (4 * alpha)) \
-         * (-1j * val) ** k * (Hz1 * z0 - 1j * val * Hz2)
+    Iz = np.exp(-1j * p_t * z0) * np.sqrt(np.pi / alpha) * (-1j * val) ** k \
+         * (Hz1 * z0 - 1j * val * Hz2) * np.exp(-p_t ** 2 / (4 * alpha))
 
     return N / (2*np.pi)**(3/2) * E * Ix * Iy * Iz
-
 
 
 """

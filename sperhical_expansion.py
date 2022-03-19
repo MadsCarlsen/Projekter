@@ -93,6 +93,7 @@ def get_flm(GTO_sph_coeff, r, Ip, Z=1):
             flm_list[sign, l, abs(m)] = GTO_sph_coeff[sign, l, abs(m)] * radial_part
     return flm_list
 
+
 def get_asymptotic_coeffs(func, n_pts, n_samp, Ip, Z=1, interval=None, plot=False):
     """
     Gets the coefficients for the asymptotic wave function from the function
@@ -143,9 +144,6 @@ def get_asymptotic_coeffs(func, n_pts, n_samp, Ip, Z=1, interval=None, plot=Fals
                 clm_lst[sgn, l, abs(m)] = (val if val > ABS_THRESH else 0)
 
     return clm_lst / np.sum(np.abs(clm_lst)**2)
-
-
-
 
 
 def eval_asymptotic(r, theta, phi, coeff_array, Ip, Z=1):
