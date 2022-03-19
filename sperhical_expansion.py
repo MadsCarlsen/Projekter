@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pyshtools as pysh
 from scipy.special import sph_harm
+from scipy.special import lpmv as assoc_legendre
 from OutputInterface import OutputInterface
 from scipy.signal import find_peaks
 import scipy.special as sp
@@ -25,8 +26,8 @@ def eval_GTOs(x, y, z, param_list):
 
 def spherical_expansion(func, N, plot_coeff=False):
     """
-    Expands a given function of theta and phi in spherical harmonics. 
-    Output is on the form Clm=cilm[0,l,m] and Cl,-m=cilm[1,l,m].
+    Expands a given function of theta and phi in spherical harmonics (f(theta, phi)).
+    Output is on the form C_(l,m) = cilm[0,l,m] and C_(l,-m) = cilm[1,l,m].
     """
     if N % 2 != 0:
         print('N should be an even number! Incrementing by one')
@@ -55,14 +56,11 @@ def spherical_expansion(func, N, plot_coeff=False):
 def eval_sph_from_coeff(theta, phi, coeff_array):
     """
     Evaluate a linear combination of spherical harmonics from the array of coefficients
-    at some given angle
+    at some given direction
     """
     max_l = coeff_array.shape[1]
     res = 0 + 0j
     for l in range(max_l):
-        if l == 0:
-            res += coeff_array[0, 0, 0] * sph_harm(0, 0, phi, theta)
-            continue
         for m in range(-l, l + 1, 1):
             if m >= 0:
                 sign = 0
@@ -72,9 +70,10 @@ def eval_sph_from_coeff(theta, phi, coeff_array):
     return res
 
 
-def get_flm(GTO_sph_coeff, r, Ip, Z=1):
+def get_asymp_from_sph_coeff(GTO_sph_coeff, r, Ip, Z=1):
     """
-    Gets the coefficients from the f_lms from the f_lms from the Laplace expansion of the GTOs
+    Gets the coeffciencts for the asymptotic expansion, given the coefficients for the sperhical expansion.
+    The matching is made at a given value of r.
     """
     kappa = np.sqrt(2*Ip)
 
@@ -95,9 +94,9 @@ def get_flm(GTO_sph_coeff, r, Ip, Z=1):
     return flm_list
 
 
-def get_as_coeffs(func, r, n_samp, Ip, Z=1):
+def get_as_coeffs(func, r, n_samp, Ip, Z=1, normalized=False):
     """
-    Get the normalised asymptotic coefficients for a given value of r in a.u.
+    Get the asymptotic coefficients for a given value of r in a.u.
     """
     flm_lst = spherical_expansion(lambda theta, phi: func(r, theta, phi), n_samp, plot_coeff=False)
     ABS_THRESH = 1e-3
@@ -110,10 +109,14 @@ def get_as_coeffs(func, r, n_samp, Ip, Z=1):
             sgn = 0 if m >= 0 else 1
             clm = flm_lst[sgn, l, abs(m)] / radial
             clm_lst[sgn, l, abs(m)] = clm if abs(clm) > ABS_THRESH else 0
-    return clm_lst / np.sum(np.abs(clm_lst)**2)
+
+    if normalized:
+        return clm_lst / np.sum(np.abs(clm_lst)**2)
+    else:
+        return clm_lst
 
 
-def get_asymptotic_coeffs(func, n_r, n_samp, Ip, Z=1, interval=None, plot=False):
+def get_asymptotic_coeffs(func, n_r, n_samp, Ip, Z=1, interval=None, plot=False, normalized=False):
     """
     Gets the coefficients for the asymptotic wave function from the function
     """
@@ -157,7 +160,10 @@ def get_asymptotic_coeffs(func, n_r, n_samp, Ip, Z=1, interval=None, plot=False)
                     plt.minorticks_on()
                     plt.show()
 
-    return clm_lst / np.sum(np.abs(clm_lst)**2)
+    if normalized:
+        return clm_lst / np.sum(np.abs(clm_lst)**2)
+    else:
+        return clm_lst
 
 
 def eval_asymptotic_cart(x, y, z, coeffs, Ip, Z=1):
@@ -181,7 +187,7 @@ def eval_asymptotic_cart(x, y, z, coeffs, Ip, Z=1):
     radial_part += radial_norm * r**(Z / kappa - 1) * np.exp(-kappa * r)
     for l in range(l_max):
         for m in range(-l, l + 1):
-            sgn = 1 if m >= 0 else 0
+            sgn = 1 if m >= 0 else 0  # This should be the other way around?
             angular_sum += coeffs[sgn, l, m]*sp.sph_harm(m, l, phi, theta)
 
     return radial_part * angular_sum
@@ -206,6 +212,71 @@ def eval_asymptotic(r, theta, phi, coeff_array, Ip, Z=1):
                 sign = 1
             res += coeff_array[sign, l, abs(m)] * sph_harm(m, l, phi, theta) * radial_part
     return res
+
+
+def cylindrical_from_spherical(r_par, r_perp, sph_coeffs):
+    """
+    Calculates the Fourier coefficients of a function given as a spherical expansion.
+    Note that if sph_coeffs depend on r, this is valid for this value of r only (r = sqrt(r_par**2 + r_perp**2))!
+    """
+    r = np.sqrt(r_perp**2 + r_par**2)
+    cos_theta = r_par / r
+    theta = np.arccos(cos_theta)
+    max_m = sph_coeffs.shape[1]-1
+
+    fm_list = []
+    for m in range(-max_m, max_m+1):
+        sign = 0 if m >= 0 else 1
+        fm = 0
+        for l, flm in enumerate(sph_coeffs[sign, :, abs(m)]):
+            if abs(m) > l or flm == 0 or flm == 0j:
+                continue
+            #N_lm = np.sqrt((2*l+1)/(4*np.pi) * np.math.factorial(l-m)/np.math.factorial(l+1))  # Should have these precalculated?
+            #fm += flm * N_lm * assoc_legendre(m, l, cos_theta)
+            fm += flm * sph_harm(m, l, 0, theta)  # This might be better?
+        fm_list.append(fm)
+    return fm_list
+
+
+def eval_cylindrical(phi, coeff_list):
+    """
+    Evaluates a function given as a Fourier series with coefficients in coeff_list
+    """
+    res = 0
+    max_m = int((len(coeff_list) - 1)/2)
+    for m, coeff in zip(range(-max_m, max_m+1), coeff_list):
+        res += np.exp(1j * m * phi) * coeff
+    return res
+
+
+
+"""
+#%%
+def test(theta, phi):
+    return 3 * np.exp(1j * 2 * phi)
+
+inter = OutputInterface('output_files/CHBrClF.out')
+#GTO_params = inter.output_GTOs()
+
+
+r_par = 3
+r_perp = 3
+
+r = np.sqrt(r_par**2 + r_perp**2)
+
+thetam = np.arccos(r_par / r)
+phim = np.pi/2
+
+sph_coeffs = spherical_expansion(lambda theta, phi : inter.eval_orbital_spherical(r, theta, phi), 50, False)
+#sph_coeffs = spherical_expansion(test, 50, False)
+print(eval_sph_from_coeff(thetam, phim, sph_coeffs))
+
+cylind_coeffs = cylindrical_from_spherical(sph_coeffs, r_par, r_perp)
+
+print(eval_cylindrical(phim, cylind_coeffs))
+
+"""
+
 # %%
 
 '''
