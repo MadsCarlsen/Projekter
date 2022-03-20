@@ -94,12 +94,20 @@ def get_asymp_from_sph_coeff(GTO_sph_coeff, r, Ip, Z=1):
     return flm_list
 
 
-def get_as_coeffs(func, r, n_samp, Ip, Z=1, normalized=False):
+def get_as_coeffs(func, r, n_samp, Ip, Z=1, abs_thresh = 1e-3, normalized=False):
     """
     Get the asymptotic coefficients for a given value of r in a.u.
+
+    :param func: Function to expand, func(r, theta, phi).
+    :param r: The r to determine the asymptotic coefficients at.
+    :param n_samp: Number of points used in the spherical expansion. Determines the accuracy.
+    :param Ip: Ionization potential.
+    :param Z: Charge of the leftover core.
+    :param abs_thresh: Threshold value of coeffs. in the expansion. All below this is set to 0.
+    :param normalized: If True, the coefficients will be normalized.
     """
     flm_lst = spherical_expansion(lambda theta, phi: func(r, theta, phi), n_samp, plot_coeff=False)
-    ABS_THRESH = 1e-3
+
     clm_lst = np.zeros_like(flm_lst, dtype=complex)
     l_max = flm_lst.shape[1]
     kappa = np.sqrt(2 * abs(Ip))
@@ -108,7 +116,7 @@ def get_as_coeffs(func, r, n_samp, Ip, Z=1, normalized=False):
         for m in range(-l, l + 1):
             sgn = 0 if m >= 0 else 1
             clm = flm_lst[sgn, l, abs(m)] / radial
-            clm_lst[sgn, l, abs(m)] = clm if abs(clm) > ABS_THRESH else 0
+            clm_lst[sgn, l, abs(m)] = clm if abs(clm) > abs_thresh else 0
 
     if normalized:
         return clm_lst / np.sum(np.abs(clm_lst)**2)
